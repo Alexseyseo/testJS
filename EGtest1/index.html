@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test</title>
+</head>
+<body>
+<ul>
+    <li><a href="index.html">Задание 1</a></li>
+    <li><a href="index2.html">Задание 2</a></li>
+    <li><a href="index3.html">Задание 3</a></li>
+    <li><a href="index4.html">Задание 4</a></li>
+</ul>
+<h3>1. Написать функцию для перевертывания букв во всех словах предложения.</h3>
+<p>Пример: <code>func('Abc def, ght.') => 'Cba fed, thg.'</code></p>
+<form id="form">
+    <label for="testString">
+        <span>Введите тестовую строку</span>
+        <input id="testString" name="testString" type="text" value="Abc def, ght." placeholder="Введите строку">
+    </label>
+    <button type="submit">Выполнить функцию</button>
+</form>
+
+<p>Стартовое значение: <span id="startValue"></span></p>
+<p>Результат выполнения функции: <span id="resultValue"></span></p>
+
+<script>
+    const testString = document.getElementById('testString');
+    const startValue = document.getElementById('startValue');
+    const resultValue = document.getElementById('resultValue');
+
+    function reverseWords(event) {
+        event.preventDefault();
+
+        const startString = testString.value;
+        let result = [];
+        for (let word of startString.split(/\s+/)) {
+            let separatorIndex = -1;
+            let capitalizeLetterIndex = -1;
+            let separator = '';
+
+            if (word && word.length) {
+                word = word.split('').reverse().join('');
+
+                separatorIndex = word.search(/^[.,?!:;]/);
+                if (separatorIndex !== -1) {
+                    separator = word.charAt(separatorIndex);
+                    word = word.slice(separatorIndex + 1);
+                }
+
+                capitalizeLetterIndex = word.search(/[A-Z|А-Я]$/);
+                if (capitalizeLetterIndex !== -1) {
+                    word = word.charAt(0).toUpperCase() + word.slice(1, word.length - 1) + word.charAt(word.length - 1).toLowerCase();
+                }
+            }
+            result.push(word + separator);
+        }
+
+        startValue.textContent = startString;
+        resultValue.textContent = result.join(' ');
+    }
+
+    document.getElementById('form').addEventListener('submit', reverseWords, false);
+</script>
+</body>
+</html>
