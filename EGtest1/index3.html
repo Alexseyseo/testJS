@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Тест. Задание 3</title>
+</head>
+<body>
+<ul>
+    <li><a href="index.html">Задание 1</a></li>
+    <li><a href="index2.html">Задание 2</a></li>
+    <li><a href="index3.html">Задание 3</a></li>
+    <li><a href="index4.html">Задание 4</a></li>
+</ul>
+<h3>Написать функцию валидации IPv4 адреса в Dot-десятичной нотации. IP является валидным, если состоит из четырех октетов, со значениями от 0 до 255 включительно. На вход функции подается строка. На выходе ожидается булево значение true или false. Не использовать регулярные выражения.</h3>
+<p>Примеры:</p>
+<ul>
+    <li>Валидные: 1.2.3.4, 123.45.67.89</li>
+    <li>Невалидные: 1.2.3, 1.2.3.4.5, 123.456.78.90, 123.045.067.089</li>
+</ul>
+
+<form id="form">
+    <label for="testIP">
+        <span>Введите тестовое значение</span>
+        <input id="testIP" name="testIP" type="text" value="255.223.23.023" placeholder="XXX.XXX.XXX.XXX">
+    </label>
+    <button type="submit">Выполнить функцию</button>
+</form>
+<p>Результат IP адрес: <span id="startValue"></span> <strong id="resultValidate"></strong></p>
+
+<script>
+    const testIP = document.getElementById('testIP');
+    const startValue = document.getElementById('startValue');
+    const resultValidate = document.getElementById('resultValidate');
+
+    function validateIP(event) {
+        event.preventDefault();
+        const ipValue = testIP.value;
+        const validateArray = ipValue.split('.');
+        let resultValue = false;
+
+        if (validateArray.length === 4 && ipValue.length <= 15) {
+            for (let octet of validateArray) {
+                let numberOctet = +octet;
+                if (numberOctet >= 0 && numberOctet <= 255 && (numberOctet + '') === octet) {
+                    resultValue = true;
+                } else {
+                    resultValue = false;
+                    break;
+                }
+            }
+        }
+
+        startValue.textContent = ipValue;
+        resultValidate.textContent = resultValue;
+
+        return resultValue;
+    }
+
+    document.getElementById('form').addEventListener('submit', validateIP, false);
+</script>
+</body>
+</html>
