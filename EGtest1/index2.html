@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Тест. Задание 1</title>
+</head>
+<body>
+<ul>
+    <li><a href="index.html">Задание 1</a></li>
+    <li><a href="index2.html">Задание 2</a></li>
+    <li><a href="index3.html">Задание 3</a></li>
+    <li><a href="index4.html">Задание 4</a></li>
+</ul>
+
+<h3>2. Написать функцию, которая находит сумму всех чисел кратных 3 или 5 до заданного числа.</h3>
+<p>Пример: <code>func(10) = 23</code></p>
+<form id="form">
+    <label for="testNumber">
+        <span>Введите тестовое значение</span>
+        <input id="testNumber" name="testNumber" type="number" value="10" placeholder="Введите число">
+    </label>
+    <button type="submit">Выполнить функцию</button>
+</form>
+
+<p>Стартовое значение: <span id="startValue"></span></p>
+<p>Сумма всех кратных 3 и 5: <span id="resultValue"></span></p>
+<script>
+    const testNumber = document.getElementById('testNumber');
+    const startValue = document.getElementById('startValue');
+    const resultValue = document.getElementById('resultValue');
+
+    function getSum(event) {
+        event.preventDefault();
+        const value = testNumber.value;
+        let result = 0;
+
+        for (let i = 0; i < value; i++) {
+            if (i % 3 === 0 || i % 5 === 0) {
+                result += i;
+            }
+        }
+
+
+        startValue.textContent = value;
+        resultValue.textContent = result;
+        return result;
+    }
+
+    document.getElementById('form').addEventListener('submit', getSum, false);
+</script>
+</body>
+</html>
