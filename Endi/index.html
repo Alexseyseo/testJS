@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Тестовое</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<script>
+    // Задание
+    // Получение с сервера координат.
+    // Создание квадратной области, внутри которой создан див квадрат.
+    // Выставление координат для внутреннего квадрата.
+    // Добавление функционала перемещения внутреннего квадрата. + Отправка новых координат после остановки перемещения.
+
+
+    // Получение с сервера координат.
+    let serverCoordinate = {
+        x: 250,
+        y: 100
+    };
+
+    // Создание квадратной области, внутри которой создан див квадрат.
+    const container = document.createElement('div');
+    container.classList.add('container');
+    container.style.width = '500px';
+    container.style.height = '500px';
+    container.style.backgroundColor = 'grey';
+
+    const square = document.createElement('div');
+    square.classList.add('square');
+    square.style.width = '100px';
+    square.style.height = '100px';
+    square.style.backgroundColor = 'brown';
+    document.body.append(container);
+
+    // Выставление координат для внутреннего квадрата.
+    square.style.left = `${serverCoordinate.x}px`;
+    square.style.top = `${serverCoordinate.y}px`;
+    square.style.position = 'absolute';
+    square.style.zIndex = 1001;
+    container.append(square);
+
+    // Добавление функционала перемещения внутреннего квадрата.
+    square.onmousedown = function (event) {
+        moveAt(event.pageX, event.pageY);
+        document.addEventListener('mousemove', onMouseMove);
+
+        square.onmouseup = function(event) {
+            // Отправка новых координат после остановки перемещения.
+            sendCoordinate({x: event.pageX, y: event.pageY});
+            document.removeEventListener('mousemove', onMouseMove);
+            square.onmouseup = null;
+        };
+
+        function moveAt(pageX, pageY) {
+            // TODO ограничение перемещения вне экрана | блока
+            square.style.left = pageX - square.offsetWidth / 2 + 'px';
+            square.style.top = pageY - square.offsetHeight / 2 + 'px';
+        }
+
+        function onMouseMove(event) {
+            moveAt(event.pageX, event.pageY);
+        }
+    };
+
+    function sendCoordinate(sendData) {
+        console.log(`Координаты ${JSON.stringify(sendData)} отправлены на сервер.`);
+    }
+</script>
+</body>
+</html>
