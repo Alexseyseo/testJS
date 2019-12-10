@@ -1,6 +1,6 @@
 loadJSON((response) => {
     const testClass = new testFour(JSON.parse(response));
-    // console.log(testClass.data.games);
+    // console.log(testClass.data);
 
     // 1
     console.log('Метод 1 возвращающий список тегов для категорий, элементы в списке не должны повторяться');
@@ -31,6 +31,14 @@ loadJSON((response) => {
     testClass.getGamesHasDemo();
     // console.log(testClass.getGamesHasDemo());
     console.timeEnd('Метод 4');
+
+    // 5
+    let testIdMerch = '977';
+    console.log('Метод 5 возвращающий список игр по заданному ID мерчанта, в качестве входного параметра принимает ID мерчанта');
+    console.time('Метод 5');
+    testClass.getGamesByIdMerch(testIdMerch);
+    // console.log(testClass.getGamesByIdMerch(testIdMerch));
+    console.timeEnd('Метод 5');
 });
 
 class testFour {
@@ -73,6 +81,12 @@ class testFour {
     getGamesHasDemo(hasDemoBoolean = true) {
         if (this.data.games && this.data.games.length) {
             return this.data.games.filter((game) => game.hasDemo === +hasDemoBoolean);
+        }
+        return [];
+    }
+    getGamesByIdMerch(idMerch) {
+        if (idMerch) {
+            return this.data.games.filter((game) => +game.MerchantID === +idMerch);
         }
         return [];
     }
