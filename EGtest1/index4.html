@@ -16,34 +16,16 @@
 </ul>
 
 <h3>Написать класс, содержащий следующие методы</h3>
-<ul>
+<ol>
     <li>возвращающий список тегов для категорий, элементы в списке не должны повторяться</li>
     <li>возвращающий категории по заданному тегу, в качестве входного параметра принимает имя тега</li>
     <li>возвращающий наименования категорий на заданном языке, в качестве входного параметра принимает 2-х значный код языка</li>
     <li>возвращающий список игр, поддерживающих демо режим (hasDemo: 1)</li>
     <li>возвращающий список игр по заданному ID мерчанта, в качестве входного параметра принимает ID мерчанта</li>
     <li>возвращающий список мерчантов, поддерживающих заданную валюту, в качестве входного параметра принимает 3-х значное (валюты, которые поддерживают мерчанты хранятся в объекте merchantCurrencies)</li>
-</ul>
+</ol>
 <p>Все методы должны класса быть максимально оптимизированы</p>
 
-<script>
-class testFour {
-    uniqTags(arrayList = []) {
-        if (arrayList && arrayList.length) {
-            let result = {};
-            return arrayList.filter((value) => result.hasOwnProperty(value) ? false : result[value] = true);
-        }
-        return false;
-    }
-    // getCategories() {
-    //
-    // }
-}
-
-
-let test = new testFour();
-const testUniq = ['test', 'test', 'trest', 'test', 'test', 'trest', 'test', 'test', 'trest', 'aleksey', 'alexsey'];
-console.log(test.uniqTags(testUniq));
-</script>
+<script src="script4.js"></script>
 </body>
 </html>
