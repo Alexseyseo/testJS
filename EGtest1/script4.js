@@ -16,6 +16,14 @@ loadJSON((response) => {
     testClass.getCategoryByTag(testTag);
     // console.log(testClass.getCategoryByTag(testTag));
     console.timeEnd('Метод 2');
+
+    // 3
+    let testCodeLang = 'ru';
+    console.log('Метод 3 возвращающий наименования категорий на заданном языке, в качестве входного параметра принимает 2-х значный код языка');
+    console.time('Метод 3');
+    testClass.getNamesCategoriesByLang(testCodeLang);
+    // console.log(testClass.getNamesCategoriesByLang(testCodeLang));
+    console.timeEnd('Метод 3');
 });
 
 class testFour {
@@ -39,6 +47,18 @@ class testFour {
     getCategoryByTag(tag) {
         if (tag && tag.length) {
             return this.data.categories.filter((category) => category.Tags.indexOf(tag) !== -1);
+        }
+    }
+    getNamesCategoriesByLang(codeLang) {
+        if (codeLang && codeLang.length) {
+            let resultArray = [];
+            this.data.categories.map((category) => {
+                const nameByLang = category.Name.hasOwnProperty(codeLang) ? category.Name[codeLang] : null;
+                if (nameByLang) {
+                    resultArray.push(nameByLang);
+                }
+            });
+            return resultArray;
         }
     }
 }
