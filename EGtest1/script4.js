@@ -1,6 +1,6 @@
 loadJSON((response) => {
     const testClass = new testFour(JSON.parse(response));
-    // console.log(testClass.data.categories);
+    // console.log(testClass.data.games);
 
     // 1
     console.log('Метод 1 возвращающий список тегов для категорий, элементы в списке не должны повторяться');
@@ -24,6 +24,13 @@ loadJSON((response) => {
     testClass.getNamesCategoriesByLang(testCodeLang);
     // console.log(testClass.getNamesCategoriesByLang(testCodeLang));
     console.timeEnd('Метод 3');
+
+    // 4
+    console.log('Метод 4 возвращающий список игр, поддерживающих демо режим (hasDemo: 1)');
+    console.time('Метод 4');
+    testClass.getGamesHasDemo();
+    // console.log(testClass.getGamesHasDemo());
+    console.timeEnd('Метод 4');
 });
 
 class testFour {
@@ -48,6 +55,7 @@ class testFour {
         if (tag && tag.length) {
             return this.data.categories.filter((category) => category.Tags.indexOf(tag) !== -1);
         }
+        return [];
     }
     getNamesCategoriesByLang(codeLang) {
         if (codeLang && codeLang.length) {
@@ -60,6 +68,13 @@ class testFour {
             });
             return resultArray;
         }
+        return [];
+    }
+    getGamesHasDemo(hasDemoBoolean = true) {
+        if (this.data.games && this.data.games.length) {
+            return this.data.games.filter((game) => game.hasDemo === +hasDemoBoolean);
+        }
+        return [];
     }
 }
 
