@@ -1,6 +1,6 @@
 loadJSON((response) => {
     const testClass = new testFour(JSON.parse(response));
-    // console.log(testClass.data);
+    console.log(testClass.data);
 
     // 1
     console.log('Метод 1 возвращающий список тегов для категорий, элементы в списке не должны повторяться');
@@ -39,6 +39,14 @@ loadJSON((response) => {
     testClass.getGamesByIdMerch(testIdMerch);
     // console.log(testClass.getGamesByIdMerch(testIdMerch));
     console.timeEnd('Метод 5');
+
+    // 6
+    let testCurrency = 'AZN';
+    console.log('Метод 6 возвращающий список мерчантов, поддерживающих заданную валюту, в качестве входного параметра принимает 3-х значное (валюты, которые поддерживают мерчанты хранятся в объекте merchantCurrencies)');
+    console.time('Метод 6');
+    testClass.getMerchByCurrency(testCurrency);
+    // console.log(testClass.getMerchByCurrency(testCurrency));
+    console.timeEnd('Метод 6');
 });
 
 class testFour {
@@ -89,6 +97,18 @@ class testFour {
             return this.data.games.filter((game) => +game.MerchantID === +idMerch);
         }
         return [];
+    }
+    getMerchByCurrency(currency) {
+        // let merchants = {}; // если нужно получить объект
+        let merchants = [];
+        this.data.merchantsCurrencies.filter((merchant) => {
+            let id = merchant.IDMerchant;
+            if (merchant.Currencies.indexOf(currency) !== -1 && this.data.merchants[id]) {
+                // merchants[id] = this.data.merchants[id]; // если нужно получить объект
+                merchants.push(this.data.merchants[id]);
+            }
+        });
+        return merchants;
     }
 }
 
