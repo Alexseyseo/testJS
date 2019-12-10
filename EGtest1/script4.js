@@ -3,11 +3,19 @@ loadJSON((response) => {
     // console.log(testClass.data.categories);
 
     // 1
-    console.log('Метод возвращающий список тегов для категорий, элементы в списке не должны повторяться');
+    console.log('Метод 1 возвращающий список тегов для категорий, элементы в списке не должны повторяться');
     console.time('Метод 1');
     testClass.getUniqTags();
     // console.log(testClass.getUniqTags());
     console.timeEnd('Метод 1');
+
+    // 2
+    let testTag = 'main';
+    console.log('Метод 2 возвращающий категории по заданному тегу, в качестве входного параметра принимает имя тега');
+    console.time('Метод 2');
+    testClass.getCategoryByTag(testTag);
+    // console.log(testClass.getCategoryByTag(testTag));
+    console.timeEnd('Метод 2');
 });
 
 class testFour {
@@ -29,11 +37,9 @@ class testFour {
         return [];
     }
     getCategoryByTag(tag) {
-        // if (tag && tag.length) {
-        //     this.data.categories.filter((category) => {
-        //
-        //     });
-        // }
+        if (tag && tag.length) {
+            return this.data.categories.filter((category) => category.Tags.indexOf(tag) !== -1);
+        }
     }
 }
 
