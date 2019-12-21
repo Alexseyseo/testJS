@@ -1,2 +1,4 @@
 .idea
 *temp
+*.lock
+*/node_modules
