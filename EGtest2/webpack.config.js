@@ -6,6 +6,7 @@ module.exports = (env) => {
     return {
         entry: {
             server: './src/server.ts',
+            main: './src/script.ts',
         },
         mode: (devMode) ? 'development' : 'production',
         target: 'node',
@@ -42,8 +43,9 @@ module.exports = (env) => {
         plugins: [
         ],
         output: {
-            filename: 'server.js',
+            filename: '[name].js',
             path: path.resolve(__dirname, 'dist')
         },
+        watch: true,
     }
 };

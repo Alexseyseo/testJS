@@ -22,6 +22,7 @@ const chaos = (): Promise<void> => {
 };
 
 app.use(compression());
+app.use(express.static('dist'));
 
 const indexHtml = require('html-loader?attrs=false!templates/index.html')
     .match(/^module.exports = "(.*)";/i)[1].trim().replace(/\\"/g, '"');
